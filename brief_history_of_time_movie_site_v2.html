@@ -1,0 +1,565 @@
+
+<!-- saved from url=(0076)file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Share+Tech+Mono&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #03060f;
+    --deep: #060d1e;
+    --surface: #0a1428;
+    --surface2: #0f1d38;
+    --blue: #4a90d9;
+    --blue-bright: #6eb3ff;
+    --blue-dim: rgba(74,144,217,0.12);
+    --blue-line: rgba(74,144,217,0.25);
+    --blue-glow: rgba(110,179,255,0.08);
+    --paper: #dce8f8;
+    --paper-dim: rgba(220,232,248,0.55);
+    --paper-faint: rgba(220,232,248,0.25);
+    --mono: 'Share Tech Mono', monospace;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--ink); color: var(--paper); font-family: var(--serif); overflow-x: hidden; line-height: 1.6; }
+
+  #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+  /* subtle grid overlay */
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(74,144,217,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(74,144,217,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.9rem 2rem;
+    border-bottom: 0.5px solid var(--blue-line);
+    background: rgba(3,6,15,0.85); backdrop-filter: blur(16px);
+  }
+  .nav-logo { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--blue-bright); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; color: var(--paper-dim); text-decoration: none; text-transform: uppercase; transition: color 0.25s; }
+  .nav-links a:hover { color: var(--blue-bright); }
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+  .nav-ticket { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.5rem 1.2rem; background: var(--blue); color: var(--ink); border: none; cursor: pointer; transition: opacity 0.2s; }
+  .nav-ticket:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    position: relative; min-height: 100vh; padding: 5rem 2rem 3rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    align-items: center; z-index: 1; max-width: 1100px; margin: 0 auto;
+  }
+  .hero-left { position: relative; }
+  .hero-eyebrow { font-family: var(--mono); font-size: 9px; letter-spacing: 0.4em; color: var(--blue); text-transform: uppercase; margin-bottom: 1.2rem; opacity: 0; animation: fadeUp 0.9s 0.3s forwards; }
+  .hero-title { font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; line-height: 0.92; letter-spacing: -0.02em; opacity: 0; animation: fadeUp 0.9s 0.5s forwards; }
+  .hero-title em { font-style: italic; color: var(--blue-bright); display: block; }
+  .hero-tagline { margin-top: 1.2rem; font-size: 1rem; font-style: italic; font-weight: 300; color: var(--paper-dim); letter-spacing: 0.06em; opacity: 0; animation: fadeUp 0.9s 0.7s forwards; }
+  .hero-buttons { margin-top: 1.8rem; display: flex; gap: 0.8rem; opacity: 0; animation: fadeUp 0.9s 0.9s forwards; }
+  .btn-primary { font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.75rem 1.8rem; background: var(--blue); color: var(--ink); border: none; cursor: pointer; transition: opacity 0.2s, transform 0.2s; }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-outline { font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.75rem 1.5rem; background: transparent; color: var(--paper); border: 0.5px solid var(--blue-line); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+  .btn-outline:hover { border-color: var(--blue-bright); color: var(--blue-bright); }
+
+  .hero-meta { margin-top: 2rem; display: flex; gap: 1.5rem; opacity: 0; animation: fadeUp 0.9s 1.1s forwards; }
+  .meta-chip { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.75rem; border: 0.5px solid var(--blue-line); color: var(--paper-dim); }
+
+  /* hero right: visual diagram */
+  .hero-right { position: relative; opacity: 0; animation: fadeUp 0.9s 0.6s forwards; }
+  .spacetime-diagram { width: 100%; aspect-ratio: 1; position: relative; }
+
+  /* INFO STRIP */
+  .info-strip {
+    position: relative; z-index: 1;
+    border-top: 0.5px solid var(--blue-line);
+    border-bottom: 0.5px solid var(--blue-line);
+    background: var(--deep);
+    display: grid; grid-template-columns: repeat(5, 1fr);
+  }
+  .strip-cell {
+    padding: 1rem 1.2rem;
+    border-right: 0.5px solid var(--blue-line);
+    display: flex; flex-direction: column; gap: 0.3rem;
+  }
+  .strip-cell:last-child { border-right: none; }
+  .strip-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--blue); }
+  .strip-val { font-family: var(--mono); font-size: 11px; color: var(--paper); letter-spacing: 0.05em; }
+
+  /* MAIN GRID LAYOUT */
+  .main-grid {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+  }
+
+  /* SYNOPSIS + HAWKING */
+  .two-col { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; border-bottom: 0.5px solid var(--blue-line); }
+  .col-block { padding: 3rem 2rem; }
+  .col-block + .col-block { border-left: 0.5px solid var(--blue-line); }
+  .block-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.35em; color: var(--blue); text-transform: uppercase; margin-bottom: 1rem; }
+  .block-title { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; line-height: 1.1; margin-bottom: 1rem; }
+  .block-body { font-size: 0.95rem; font-weight: 300; color: var(--paper-dim); line-height: 1.75; }
+  .block-body p + p { margin-top: 0.9rem; }
+
+  /* HAWKING TIMELINE */
+  .timeline { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0; }
+  .tl-item { display: flex; gap: 1rem; padding: 0.8rem 0; border-top: 0.5px solid var(--blue-line); align-items: flex-start; }
+  .tl-year { font-family: var(--mono); font-size: 10px; color: var(--blue-bright); min-width: 38px; padding-top: 2px; }
+  .tl-text { font-size: 0.88rem; font-weight: 300; color: var(--paper-dim); line-height: 1.5; }
+
+  /* CONCEPTS SECTION */
+  .concepts-section { border-bottom: 0.5px solid var(--blue-line); }
+  .section-head { padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 0.5px solid var(--blue-line); }
+  .section-head-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.35em; color: var(--blue); text-transform: uppercase; }
+  .section-head-title { font-size: 1.4rem; font-weight: 300; }
+
+  .concepts-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .concept-card { padding: 1.8rem 1.5rem; border-right: 0.5px solid var(--blue-line); transition: background 0.25s; cursor: default; }
+  .concept-card:last-child { border-right: none; }
+  .concept-card:hover { background: var(--blue-dim); }
+  .concept-sym { font-family: var(--mono); font-size: 1.4rem; color: var(--blue-bright); margin-bottom: 1rem; display: block; }
+  .concept-name { font-size: 1.05rem; font-weight: 300; margin-bottom: 0.6rem; }
+  .concept-desc { font-size: 0.82rem; font-weight: 300; color: var(--paper-dim); line-height: 1.65; }
+  .concept-eq { margin-top: 0.9rem; font-family: var(--mono); font-size: 9px; color: var(--blue); letter-spacing: 0.05em; padding: 0.4rem 0.6rem; border: 0.5px solid var(--blue-line); display: inline-block; }
+
+  /* QUOTES ROW */
+  .quotes-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 0.5px solid var(--blue-line); }
+  .quote-block { padding: 2.5rem 2rem; border-right: 0.5px solid var(--blue-line); }
+  .quote-block:last-child { border-right: none; }
+  .q-mark { font-family: var(--mono); font-size: 8px; letter-spacing: 0.3em; color: var(--blue); margin-bottom: 1rem; text-transform: uppercase; }
+  .q-text { font-size: 1.15rem; font-style: italic; font-weight: 300; color: var(--paper); line-height: 1.55; margin-bottom: 0.75rem; }
+  .q-attr { font-family: var(--mono); font-size: 8px; letter-spacing: 0.2em; color: var(--paper-faint); text-transform: uppercase; }
+
+  /* CAST + CREW */
+  .cast-section { border-bottom: 0.5px solid var(--blue-line); }
+  .cast-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .cast-card { padding: 1.5rem 1.2rem; border-right: 0.5px solid var(--blue-line); transition: background 0.25s; }
+  .cast-card:last-child { border-right: none; }
+  .cast-card:hover { background: var(--blue-dim); }
+  .cast-av { width: 36px; height: 36px; border-radius: 50%; background: var(--surface2); border: 0.5px solid var(--blue-line); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 9px; color: var(--blue-bright); margin-bottom: 0.75rem; }
+  .cast-role { font-family: var(--mono); font-size: 8px; letter-spacing: 0.2em; color: var(--blue); text-transform: uppercase; margin-bottom: 0.3rem; }
+  .cast-name { font-size: 0.95rem; font-weight: 300; }
+
+  /* REVIEWS */
+  .reviews-section { border-bottom: 0.5px solid var(--blue-line); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .review-card { padding: 1.8rem 1.5rem; border-right: 0.5px solid var(--blue-line); }
+  .review-card:last-child { border-right: none; }
+  .review-stars { font-family: var(--mono); font-size: 10px; color: var(--blue-bright); margin-bottom: 0.75rem; letter-spacing: 0.1em; }
+  .review-text { font-size: 0.9rem; font-style: italic; font-weight: 300; color: var(--paper-dim); line-height: 1.65; margin-bottom: 0.75rem; }
+  .review-source { font-family: var(--mono); font-size: 8px; letter-spacing: 0.2em; color: var(--paper-faint); text-transform: uppercase; }
+
+  /* VISUAL — spacetime/black hole data panel */
+  .data-section { display: grid; grid-template-columns: 1.2fr 1fr; border-bottom: 0.5px solid var(--blue-line); }
+  .data-visual { padding: 2rem; border-right: 0.5px solid var(--blue-line); display: flex; flex-direction: column; gap: 1rem; }
+  .data-panel { padding: 2rem; background: var(--surface); }
+  .data-row { display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 0; border-bottom: 0.5px solid var(--blue-line); }
+  .data-row:last-child { border-bottom: none; }
+  .data-key { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; color: var(--paper-dim); text-transform: uppercase; }
+  .data-val { font-family: var(--mono); font-size: 10px; color: var(--blue-bright); }
+  .data-bar-wrap { height: 2px; background: var(--blue-line); margin-top: 0.3rem; }
+  .data-bar { height: 2px; background: var(--blue); }
+
+  /* CTA */
+  .cta-block { padding: 3rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; border-bottom: 0.5px solid var(--blue-line); }
+  .cta-title { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.05; margin-bottom: 0.8rem; }
+  .cta-sub { font-size: 0.9rem; font-style: italic; color: var(--paper-dim); margin-bottom: 1.5rem; }
+  .cta-btns { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .cta-note { margin-top: 1rem; font-family: var(--mono); font-size: 8px; letter-spacing: 0.15em; color: var(--paper-faint); text-transform: uppercase; }
+  .showtime-box { background: var(--surface); padding: 1.5rem; }
+  .st-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.3em; color: var(--blue); text-transform: uppercase; margin-bottom: 1rem; }
+  .st-item { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 0.5px solid var(--blue-line); font-family: var(--mono); font-size: 10px; }
+  .st-item:last-child { border-bottom: none; }
+  .st-cinema { color: var(--paper-dim); }
+  .st-time { color: var(--blue-bright); }
+
+  footer {
+    position: relative; z-index: 1;
+    border-top: 0.5px solid var(--blue-line);
+    padding: 1.2rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--deep);
+  }
+  .footer-logo { font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em; color: var(--blue); text-transform: uppercase; }
+  .footer-copy { font-family: var(--mono); font-size: 8px; color: var(--paper-faint); letter-spacing: 0.1em; }
+  .footer-links { display: flex; gap: 1.2rem; }
+  .footer-links a { font-family: var(--mono); font-size: 8px; letter-spacing: 0.15em; color: var(--paper-faint); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--blue-bright); }
+
+  .trailer-modal { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(3,6,15,0.96); align-items: center; justify-content: center; }
+  .trailer-modal.open { display: flex; }
+  .trailer-inner { position: relative; max-width: 800px; width: 90%; }
+  .trailer-close { position: absolute; top: -2rem; right: 0; font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em; color: var(--blue-bright); background: none; border: none; cursor: pointer; text-transform: uppercase; }
+  .trailer-box { background: var(--surface); border: 0.5px solid var(--blue-line); aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; }
+  .play-btn { width: 56px; height: 56px; border-radius: 50%; border: 0.5px solid var(--blue); display: flex; align-items: center; justify-content: center; }
+  .play-icon { width: 0; height: 0; border-style: solid; border-width: 9px 0 9px 16px; border-color: transparent transparent transparent var(--blue-bright); margin-left: 4px; }
+  .trailer-cap { font-family: var(--mono); font-size: 8px; letter-spacing: 0.25em; color: var(--paper-faint); text-transform: uppercase; }
+
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes spinR { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+  @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+</style>
+
+</head><body><h2 class="sr-only" style="position:absolute;left:-9999px">A Brief History of Time — Official Movie Website</h2>
+
+<canvas id="starfield" width="896" height="805"></canvas>
+
+<nav>
+  <div class="nav-logo">BHOT · 2025</div>
+  <ul class="nav-links">
+    <li><a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#story">Story</a></li>
+    <li><a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#science">Science</a></li>
+    <li><a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#cast">Cast</a></li>
+    <li><a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#press">Press</a></li>
+    <li><a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#tickets">Tickets</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-ticket" onclick="document.getElementById(&#39;tickets&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Book Now</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div style="position:relative;z-index:1;">
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Based on the book by Stephen W. Hawking</p>
+      <h1 class="hero-title">A Brief<br>History<em>of Time</em></h1>
+      <p class="hero-tagline">From the Big Bang to black holes — the universe, at last, on screen.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="document.querySelector(&#39;.trailer-modal&#39;).classList.add(&#39;open&#39;)">▶ Watch Trailer</button>
+        <button class="btn-outline" onclick="document.getElementById(&#39;tickets&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Get Tickets</button>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-chip">PG · 2h 18m</span>
+        <span class="meta-chip">IMAX Available</span>
+        <span class="meta-chip">In Cinemas 2025</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <svg class="spacetime-diagram" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialgradient id="bh" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#03060f"></stop>
+            <stop offset="60%" stop-color="#060d1e"></stop>
+            <stop offset="100%" stop-color="rgba(74,144,217,0)"></stop>
+          </radialgradient>
+          <radialgradient id="glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(110,179,255,0.18)"></stop>
+            <stop offset="100%" stop-color="rgba(110,179,255,0)"></stop>
+          </radialgradient>
+        </defs>
+
+        <!-- spacetime grid lines warped toward center -->
+        <g stroke="rgba(74,144,217,0.18)" stroke-width="0.5">
+          <!-- horizontal warped lines -->
+          <path d="M 30 60 Q 210 80 390 60" fill="none"></path>
+          <path d="M 30 100 Q 210 130 390 100" fill="none"></path>
+          <path d="M 30 140 Q 210 185 390 140" fill="none"></path>
+          <path d="M 30 175 Q 210 240 390 175" fill="none"></path>
+          <path d="M 30 210 Q 210 295 390 210" fill="none"></path>
+          <path d="M 30 245 Q 210 340 390 245" fill="none"></path>
+          <path d="M 30 280 Q 210 355 390 280" fill="none"></path>
+          <path d="M 30 320 Q 210 360 390 320" fill="none"></path>
+          <path d="M 30 360 Q 210 370 390 360" fill="none"></path>
+          <!-- vertical warped lines -->
+          <path d="M 60 30 Q 80 210 60 390" fill="none"></path>
+          <path d="M 100 30 Q 130 210 100 390" fill="none"></path>
+          <path d="M 140 30 Q 185 210 140 390" fill="none"></path>
+          <path d="M 175 30 Q 240 210 175 390" fill="none"></path>
+          <path d="M 210 30 Q 295 210 210 390" fill="none"></path>
+          <path d="M 245 30 Q 340 210 245 390" fill="none"></path>
+          <path d="M 280 30 Q 355 210 280 390" fill="none"></path>
+          <path d="M 320 30 Q 360 210 320 390" fill="none"></path>
+          <path d="M 360 30 Q 370 210 360 390" fill="none"></path>
+        </g>
+
+        <!-- accretion glow -->
+        <circle cx="210" cy="210" r="110" fill="url(#glow)"></circle>
+
+        <!-- orbit rings -->
+        <ellipse cx="210" cy="210" rx="130" ry="38" fill="none" stroke="rgba(74,144,217,0.22)" stroke-width="0.8" style="animation: spin 18s linear infinite; transform-origin: 210px 210px;"></ellipse>
+        <ellipse cx="210" cy="210" rx="95" ry="28" fill="none" stroke="rgba(110,179,255,0.3)" stroke-width="0.8" style="animation: spinR 12s linear infinite; transform-origin: 210px 210px;"></ellipse>
+
+        <!-- black hole -->
+        <circle cx="210" cy="210" r="62" fill="url(#bh)"></circle>
+        <circle cx="210" cy="210" r="62" fill="none" stroke="rgba(110,179,255,0.5)" stroke-width="0.8"></circle>
+        <circle cx="210" cy="210" r="44" fill="#03060f"></circle>
+
+        <!-- orbiting particle -->
+        <circle r="3.5" fill="#6eb3ff" style="animation: spin 6s linear infinite; transform-origin: 210px 210px;">
+          <animatemotion dur="6s" repeatCount="indefinite">
+            <mpath href="#orbit-path"></mpath>
+          </animatemotion>
+        </circle>
+        <ellipse id="orbit-path" cx="210" cy="210" rx="95" ry="28"></ellipse>
+
+        <!-- labels -->
+        <text x="210" y="206" text-anchor="middle" font-family="Share Tech Mono" font-size="8" fill="rgba(110,179,255,0.7)" letter-spacing="2">SINGULARITY</text>
+        <text x="210" y="220" text-anchor="middle" font-family="Share Tech Mono" font-size="7" fill="rgba(74,144,217,0.5)" letter-spacing="1.5">r = 0</text>
+
+        <!-- event horizon label -->
+        <line x1="272" y1="210" x2="310" y2="185" stroke="rgba(74,144,217,0.35)" stroke-width="0.5"></line>
+        <text x="314" y="183" font-family="Share Tech Mono" font-size="8" fill="rgba(74,144,217,0.7)" letter-spacing="1">EVENT HORIZON</text>
+
+        <!-- Hawking radiation dots -->
+        <circle cx="210" cy="145" r="2" fill="rgba(110,179,255,0.6)" style="animation: pulse 2.2s infinite;"></circle>
+        <circle cx="240" cy="150" r="1.5" fill="rgba(110,179,255,0.5)" style="animation: pulse 1.8s 0.4s infinite;"></circle>
+        <circle cx="180" cy="148" r="1.5" fill="rgba(110,179,255,0.5)" style="animation: pulse 2s 0.8s infinite;"></circle>
+        <text x="210" y="132" text-anchor="middle" font-family="Share Tech Mono" font-size="7" fill="rgba(74,144,217,0.55)" letter-spacing="1">HAWKING RADIATION</text>
+
+        <!-- corner labels -->
+        <text x="18" y="20" font-family="Share Tech Mono" font-size="7" fill="rgba(74,144,217,0.35)">PAST</text>
+        <text x="370" y="20" font-family="Share Tech Mono" font-size="7" fill="rgba(74,144,217,0.35)">FUTURE</text>
+        <text x="18" y="410" font-family="Share Tech Mono" font-size="7" fill="rgba(74,144,217,0.35)">SPACE</text>
+        <text x="360" y="410" font-family="Share Tech Mono" font-size="7" fill="rgba(74,144,217,0.35)">TIME →</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- INFO STRIP -->
+  <div class="info-strip">
+    <div class="strip-cell"><span class="strip-label">Director</span><span class="strip-val">Denis Villeneuve</span></div>
+    <div class="strip-cell"><span class="strip-label">Screenplay</span><span class="strip-val">Alex Garland</span></div>
+    <div class="strip-cell"><span class="strip-label">Source</span><span class="strip-val">S.W. Hawking, 1988</span></div>
+    <div class="strip-cell"><span class="strip-label">Genre</span><span class="strip-val">Sci-Fi / Biographical</span></div>
+    <div class="strip-cell"><span class="strip-label">Release</span><span class="strip-val">Dec 12, 2025</span></div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-grid" id="story">
+
+  <!-- SYNOPSIS + TIMELINE -->
+  <div class="two-col fade-in visible">
+    <div class="col-block">
+      <p class="block-label">The Film</p>
+      <h2 class="block-title">A mind that<br><em style="font-style:italic;color:var(--blue-bright)">bent the cosmos</em></h2>
+      <div class="block-body">
+        <p>From the mind that redefined our understanding of the universe comes an extraordinary cinematic vision. This adaptation of Stephen Hawking's legendary work brings cosmology to breathtaking, intimate life.</p>
+        <p>Weaving personal biography with visual explorations of black holes, the Big Bang, and the nature of time itself, the film asks the questions Hawking spent his life pursuing: where did we come from, and does time have a beginning?</p>
+        <p>Shot across Cambridge, CERN, and the Atacama Desert, with astrophysical visualizations developed in collaboration with Caltech and the ESA.</p>
+      </div>
+    </div>
+    <div class="col-block">
+      <p class="block-label">Hawking's Life</p>
+      <div class="timeline">
+        <div class="tl-item"><span class="tl-year">1942</span><span class="tl-text">Born in Oxford, England, on the 300th anniversary of Galileo's death.</span></div>
+        <div class="tl-item"><span class="tl-year">1963</span><span class="tl-text">Diagnosed with motor neurone disease at 21; given two years to live.</span></div>
+        <div class="tl-item"><span class="tl-year">1970</span><span class="tl-text">Proves that black holes must have a singularity with Roger Penrose.</span></div>
+        <div class="tl-item"><span class="tl-year">1974</span><span class="tl-text">Proposes Hawking radiation — black holes slowly evaporate over time.</span></div>
+        <div class="tl-item"><span class="tl-year">1988</span><span class="tl-text"><em style="font-style:italic">A Brief History of Time</em> published; sells 10 million copies in a decade.</span></div>
+        <div class="tl-item"><span class="tl-year">2018</span><span class="tl-text">Dies at 76 in Cambridge — having outlived his prognosis by 55 years.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCIENCE CONCEPTS -->
+  <div class="concepts-section fade-in visible" id="science">
+    <div class="section-head">
+      <span class="section-head-label">The Science</span>
+      <span class="section-head-title">Ideas that changed everything</span>
+    </div>
+    <div class="concepts-grid">
+      <div class="concept-card">
+        <span class="concept-sym">◉</span>
+        <h3 class="concept-name">Black Holes</h3>
+        <p class="concept-desc">Regions of spacetime where gravity is so extreme that nothing — not even light — can escape. At their centre lies a singularity, where density becomes infinite and known physics breaks down.</p>
+        <span class="concept-eq">Rs = 2GM/c²</span>
+      </div>
+      <div class="concept-card">
+        <span class="concept-sym">△</span>
+        <h3 class="concept-name">The Big Bang</h3>
+        <p class="concept-desc">13.8 billion years ago, the universe erupted from an infinitely hot, dense point. Space, time, and matter all began in this single moment — there was no "before."</p>
+        <span class="concept-eq">t = 0, T → ∞</span>
+      </div>
+      <div class="concept-card">
+        <span class="concept-sym">∞</span>
+        <h3 class="concept-name">Arrow of Time</h3>
+        <p class="concept-desc">Why does time only flow forward? Hawking links the thermodynamic arrow of time — entropy always increases — to the cosmological expansion of the universe itself.</p>
+        <span class="concept-eq">ΔS ≥ 0</span>
+      </div>
+      <div class="concept-card">
+        <span class="concept-sym">⊛</span>
+        <h3 class="concept-name">Quantum Gravity</h3>
+        <p class="concept-desc">The great unification problem: reconciling Einstein's general relativity with quantum mechanics into a single "theory of everything." Hawking's no-boundary proposal imagines a universe with no edge in time.</p>
+        <span class="concept-eq">S = k log Ω</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA PANEL + UNIVERSE STATS -->
+  <div class="data-section fade-in visible">
+    <div class="data-visual">
+      <p class="block-label">Universe — Key Data</p>
+      <div class="data-row"><span class="data-key">Age of Universe</span><span class="data-val">13.8 × 10⁹ yr</span></div>
+      <div class="data-row"><span class="data-key">Observable radius</span><span class="data-val">46.5 billion ly</span></div>
+      <div class="data-row"><span class="data-key">Speed of light</span><span class="data-val">299,792,458 m/s</span></div>
+      <div class="data-row"><span class="data-key">Planck temperature</span><span class="data-val">1.416 × 10³² K</span></div>
+      <div class="data-row"><span class="data-key">Hawking temp (solar BH)</span><span class="data-val">6 × 10⁻⁸ K</span></div>
+      <div class="data-row"><span class="data-key">Dark matter (universe)</span><span class="data-val">~27%</span></div>
+      <div class="data-row"><span class="data-key">Dark energy</span><span class="data-val">~68%</span></div>
+      <div class="data-row"><span class="data-key">Baryonic matter</span><span class="data-val">~5%</span></div>
+    </div>
+    <div class="data-panel">
+      <p class="block-label">Universe Composition</p>
+      <div style="margin-top:0.5rem;">
+        <div class="data-row"><span class="data-key">Dark Energy</span><span class="data-val">68%</span></div>
+        <div class="data-bar-wrap"><div class="data-bar" style="width:68%"></div></div>
+        <div class="data-row" style="margin-top:0.8rem;"><span class="data-key">Dark Matter</span><span class="data-val">27%</span></div>
+        <div class="data-bar-wrap"><div class="data-bar" style="width:27%; background:rgba(110,179,255,0.6)"></div></div>
+        <div class="data-row" style="margin-top:0.8rem;"><span class="data-key">Ordinary Matter</span><span class="data-val">5%</span></div>
+        <div class="data-bar-wrap"><div class="data-bar" style="width:5%; background:rgba(110,179,255,0.35)"></div></div>
+      </div>
+      <div style="margin-top:2rem;">
+        <p class="block-label">Book — by numbers</p>
+        <div class="data-row"><span class="data-key">Copies sold</span><span class="data-val">40M+</span></div>
+        <div class="data-row"><span class="data-key">Languages translated</span><span class="data-val">35</span></div>
+        <div class="data-row"><span class="data-key">Weeks on Sunday Times list</span><span class="data-val">237</span></div>
+        <div class="data-row"><span class="data-key">Publication year</span><span class="data-val">1988</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTES -->
+  <div class="quotes-row fade-in visible">
+    <div class="quote-block">
+      <p class="q-mark">— S.W. Hawking</p>
+      <p class="q-text">"If the rate of expansion one second after the Big Bang had been smaller by even one part in a hundred thousand million million, the universe would have recollapsed before it ever reached its present size."</p>
+      <p class="q-attr">A Brief History of Time, Chapter 8</p>
+    </div>
+    <div class="quote-block">
+      <p class="q-mark">— S.W. Hawking</p>
+      <p class="q-text">"Even if there is only one possible unified theory, it is just a set of rules and equations. What is it that breathes fire into the equations and makes a universe for them to describe?"</p>
+      <p class="q-attr">A Brief History of Time, Chapter 11</p>
+    </div>
+  </div>
+
+  <!-- CAST -->
+  <div class="cast-section fade-in visible" id="cast">
+    <div class="section-head">
+      <span class="section-head-label">Cast &amp; Crew</span>
+      <span class="section-head-title">The people behind the picture</span>
+    </div>
+    <div class="cast-grid">
+      <div class="cast-card"><div class="cast-av">BC</div><p class="cast-role">Stephen Hawking</p><p class="cast-name">Benedict Cumberbatch</p></div>
+      <div class="cast-card"><div class="cast-av">FJ</div><p class="cast-role">Jane Hawking</p><p class="cast-name">Felicity Jones</p></div>
+      <div class="cast-card"><div class="cast-av">DV</div><p class="cast-role">Director</p><p class="cast-name">Denis Villeneuve</p></div>
+      <div class="cast-card"><div class="cast-av">AG</div><p class="cast-role">Screenplay</p><p class="cast-name">Alex Garland</p></div>
+    </div>
+  </div>
+
+  <!-- PRESS -->
+  <div class="reviews-section fade-in visible" id="press">
+    <div class="section-head">
+      <span class="section-head-label">Press</span>
+      <span class="section-head-title">What critics are saying</span>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <p class="review-stars">★ ★ ★ ★ ★</p>
+        <p class="review-text">"A film that makes you feel the weight and wonder of the cosmos. Villeneuve has done the impossible — he has made theoretical physics cinematic, human, and devastating."</p>
+        <p class="review-source">The Guardian</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★ ★ ★ ★ ★</p>
+        <p class="review-text">"Cumberbatch delivers the performance of the decade. The visualizations of spacetime and black holes are unlike anything committed to film before."</p>
+        <p class="review-source">Empire Magazine</p>
+      </div>
+      <div class="review-card">
+        <p class="review-stars">★ ★ ★ ★ ½</p>
+        <p class="review-text">"An intellectual triumph and an emotional gut-punch. The universe has never felt so vast, and Hawking's life has never felt so small and so enormous at once."</p>
+        <p class="review-source">New York Times</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TICKETS -->
+  <div class="cta-block fade-in visible" id="tickets">
+    <div>
+      <p class="block-label">Now Playing</p>
+      <h2 class="cta-title">Reserve your seat<br><em style="font-style:italic;color:var(--blue-bright)">in the universe</em></h2>
+      <p class="cta-sub">In cinemas worldwide — IMAX &amp; Standard formats available</p>
+      <div class="cta-btns">
+        <button class="btn-primary">Find Showtimes</button>
+        
+        
+      </div>
+      <p class="cta-note">Rated PG • 2h 18m • Subtitles &amp; AD available</p>
+    </div>
+    <div class="showtime-box">
+      <p class="st-label">Sample Showtimes — Today</p>
+      <div class="st-item"><span class="st-cinema">Larkspur Landing</span><span class="st-time">18:30 · IMAX</span></div>
+      <div class="st-item"><span class="st-cinema">Tiburon Playhouse</span><span class="st-time">19:00 · Standard</span></div>
+      <div class="st-item"><span class="st-cinema">Cinemark Novato</span><span class="st-time">17:45 · Standard</span></div>
+      
+      
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">A Brief History of Time · 2025</div>
+  <p class="footer-copy">© 2025 Hawking Estate. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#">Press Kit</a>
+    <a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#">Educators</a>
+    <a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#">Accessibility</a>
+    <a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#">Privacy</a>
+  </div>
+</footer>
+
+<!-- TRAILER MODAL -->
+<div class="trailer-modal" onclick="this.classList.remove(&#39;open&#39;)">
+  <div class="trailer-inner" onclick="event.stopPropagation()">
+    <button class="trailer-close" onclick="document.querySelector(&#39;.trailer-modal&#39;).classList.remove(&#39;open&#39;)">✕ Close</button>
+    <div class="trailer-box">
+      <div class="play-btn"><div class="play-icon"></div></div>
+      <p class="trailer-cap">Official Theatrical Trailer · 2025</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+function initStars() {
+  stars = Array.from({length: 300}, () => ({
+    x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+    r: Math.random() * 1.2 + 0.1,
+    a: Math.random() * 0.6 + 0.1,
+    speed: Math.random() * 0.08 + 0.01,
+    blue: Math.random() > 0.7
+  }));
+}
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fillStyle = s.blue ? `rgba(110,179,255,${s.a})` : `rgba(220,232,248,${s.a})`;
+    ctx.fill();
+    s.y += s.speed;
+    if (s.y > canvas.height) { s.y = 0; s.x = Math.random() * canvas.width; }
+  });
+  requestAnimationFrame(draw);
+}
+resize(); initStars(); draw();
+window.addEventListener('resize', () => { resize(); initStars(); });
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body></html>
