@@ -1,6 +1,11 @@
 
 <!-- saved from url=(0076)file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+  <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Share+Tech+Mono&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,11 +23,11 @@
     --paper: #dce8f8;
     --paper-dim: rgba(220,232,248,0.55);
     --paper-faint: rgba(220,232,248,0.25);
-    --mono: 'Share Tech Mono', monospace;
-    --serif: 'Cormorant Garamond', Georgia, serif;
+    --mono: 'JetBrains Mono','Share Tech Mono', monospace;
+    --serif:  'Alegreya','Cormorant Garamond', Georgia, serif;
   }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; zoom: 125%;}
   body { background: var(--ink); color: var(--paper); font-family: var(--serif); overflow-x: hidden; line-height: 1.6; }
 
   #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
@@ -207,14 +212,34 @@
   @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   @keyframes spinR { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
   @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
-</style>
+
+
+  .big-quote h1{
+    font-size: clamp(2rem, 4vw, 4.5rem);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .big-quote{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:5vw;
+    grid-column: span 2;
+  }
+  .big-quote em { font-style: italic; color: var(--blue-bright)}
+
+  </style>
 
 </head><body><h2 class="sr-only" style="position:absolute;left:-9999px">A Brief History of Time — Official Movie Website</h2>
 
 <canvas id="starfield" width="896" height="805"></canvas>
 
 <nav>
-  <div class="nav-logo">BHOT · 2025</div>
+  <div class="nav-logo">BHOT · 2027</div>
   <ul class="nav-links">
     <li><a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#story">Story</a></li>
     <li><a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#science">Science</a></li>
@@ -232,8 +257,8 @@
   <section class="hero">
     <div class="hero-left">
       <p class="hero-eyebrow">Based on the book by Stephen W. Hawking</p>
-      <h1 class="hero-title">A Brief<br>History<em>of Time</em></h1>
-      <p class="hero-tagline">From the Big Bang to black holes — the universe, at last, on screen.</p>
+      <h1 class="hero-title">A Brief<br>History<em>of <spam style="margin-left:.1em"> </spam>Time</em></h1>
+      <p class="hero-tagline">From the Big Bang to black holes, the universe, for everyone, on screen.</p>
       <div class="hero-buttons">
         <button class="btn-primary" onclick="document.querySelector(&#39;.trailer-modal&#39;).classList.add(&#39;open&#39;)">▶ Watch Trailer</button>
         <button class="btn-outline" onclick="document.getElementById(&#39;tickets&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Get Tickets</button>
@@ -241,8 +266,9 @@
       <div class="hero-meta">
         <span class="meta-chip">PG · 2h 18m</span>
         <span class="meta-chip">IMAX Available</span>
-        <span class="meta-chip">In Cinemas 2025</span>
+        <span class="meta-chip">In Cinemas 2027</span>
       </div>
+      <
     </div>
     <div class="hero-right">
       <svg class="spacetime-diagram" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
@@ -323,20 +349,73 @@
         <text x="360" y="410" font-family="Share Tech Mono" font-size="7" fill="rgba(74,144,217,0.35)">TIME →</text>
       </svg>
     </div>
+    <div class="big-quote">
+      <h1 >The first time ordinary people see the <em>secrets of the universe</em></h1>
+    </div>
   </section>
+
 
   <!-- INFO STRIP -->
   <div class="info-strip">
-    <div class="strip-cell"><span class="strip-label">Director</span><span class="strip-val">Denis Villeneuve</span></div>
-    <div class="strip-cell"><span class="strip-label">Screenplay</span><span class="strip-val">Alex Garland</span></div>
+    <div class="strip-cell"><span class="strip-label">Director</span><span class="strip-val">Reid Stoll</span></div>
+    <div class="strip-cell"><span class="strip-label">Screenplay</span><span class="strip-val">Matias Ryan</span></div>
     <div class="strip-cell"><span class="strip-label">Source</span><span class="strip-val">S.W. Hawking, 1988</span></div>
-    <div class="strip-cell"><span class="strip-label">Genre</span><span class="strip-val">Sci-Fi / Biographical</span></div>
-    <div class="strip-cell"><span class="strip-label">Release</span><span class="strip-val">Dec 12, 2025</span></div>
+    <div class="strip-cell"><span class="strip-label">Genre</span><span class="strip-val">Documentary</span></div>
+    <div class="strip-cell"><span class="strip-label">Release</span><span class="strip-val">Dec 12, 2027</span></div>
   </div>
 </div>
 
 <!-- MAIN CONTENT -->
 <div class="main-grid" id="story">
+
+  <!-- SCIENCE CONCEPTS -->
+  <div class="concepts-section fade-in visible" id="science">
+    <div class="section-head">
+      <span class="section-head-label">The Science</span>
+      <span class="section-head-title">Ideas that changed everything</span>
+    </div>
+    <!-- QUOTES -->
+    <div class="quotes-row fade-in visible">
+      <div class="quote-block">
+        <p class="q-mark">— S.W. Hawking</p>
+        <p class="q-text">"If the rate of expansion one second after the Big Bang had been smaller by even one part in a hundred thousand million million, the universe would have recollapsed before it ever reached its present size."</p>
+        <p class="q-attr">A Brief History of Time, Chapter 8</p>
+      </div>
+      <div class="quote-block">
+        <p class="q-mark">— Dillon Wilson</p>
+        <p class="q-text">"The first look for the average person into the true nature of the universe"</p>
+        <p class="q-attr">Movie Critic</p>
+      </div>
+    </div>
+    <div class="concepts-grid">
+      <div class="concept-card">
+        <span class="concept-sym">◉</span>
+        <h3 class="concept-name">Black Holes</h3>
+        <p class="concept-desc">Regions of spacetime where gravity is so extreme that nothing, not even light, can escape. At their center lies a single point of infinite density and known physics break down.</p>
+        <span class="concept-eq">Rs = 2GM/c²</span>
+      </div>
+      <div class="concept-card">
+        <span class="concept-sym">△</span>
+        <h3 class="concept-name">The Big Bang</h3>
+        <p class="concept-desc">13.8 billion years ago, the universe erupted from an infinitely hot, dense point. Space, time, and matter all began in this single moment. The idea of "time" was invented here</p>
+        <span class="concept-eq">t = 0, T → ∞</span>
+      </div>
+      <div class="concept-card">
+        <span class="concept-sym">∞</span>
+        <h3 class="concept-name">Arrow of Time</h3>
+        <p class="concept-desc">Why does time only flow forward? Hawking links entropy, or the idea everything moves towards a state of disorder, to the rapid expansion of the universe itself.</p>
+        <span class="concept-eq">ΔS ≥ 0</span>
+      </div>
+      <div class="concept-card">
+        <span class="concept-sym">⊛</span>
+        <h3 class="concept-name">Quantum Gravity</h3>
+        <p class="concept-desc">The great unification problem: reconciling Einstein's general relativity with quantum mechanics into the Theory of Everything. Hawking's no-boundary proposal imagines a universe with no edge in time.</p>
+        <span class="concept-eq">S = k log Ω</span>
+      </div>
+    </div>
+  </div>
+  <br><br><br><br>
+
 
   <!-- SYNOPSIS + TIMELINE -->
   <div class="two-col fade-in visible">
@@ -344,9 +423,15 @@
       <p class="block-label">The Film</p>
       <h2 class="block-title">A mind that<br><em style="font-style:italic;color:var(--blue-bright)">bent the cosmos</em></h2>
       <div class="block-body">
-        <p>From the mind that redefined our understanding of the universe comes an extraordinary cinematic vision. This adaptation of Stephen Hawking's legendary work brings cosmology to breathtaking, intimate life.</p>
-        <p>Weaving personal biography with visual explorations of black holes, the Big Bang, and the nature of time itself, the film asks the questions Hawking spent his life pursuing: where did we come from, and does time have a beginning?</p>
-        <p>Shot across Cambridge, CERN, and the Atacama Desert, with astrophysical visualizations developed in collaboration with Caltech and the ESA.</p>
+        <p>
+          How does the universe truly work? What secrets are still yet uncovered? Is there a God and did he create the universe?
+        </p>
+        <p>
+          Steven Hawking is one of the most brilliant minds in science and astronomy, and his theories delve deep into the intricacies of the universe. His work explains how the most bizarre objects in our universe function; black holes.
+        </p>
+        <p>
+          Coming 2027, Steven Hawking puts the complex theories of physics and astronomy into a language everybody can understand, no formulas, no mind bending jargon, just science. Just explanations.
+        </p>
       </div>
     </div>
     <div class="col-block">
@@ -362,39 +447,8 @@
     </div>
   </div>
 
-  <!-- SCIENCE CONCEPTS -->
-  <div class="concepts-section fade-in visible" id="science">
-    <div class="section-head">
-      <span class="section-head-label">The Science</span>
-      <span class="section-head-title">Ideas that changed everything</span>
-    </div>
-    <div class="concepts-grid">
-      <div class="concept-card">
-        <span class="concept-sym">◉</span>
-        <h3 class="concept-name">Black Holes</h3>
-        <p class="concept-desc">Regions of spacetime where gravity is so extreme that nothing — not even light — can escape. At their centre lies a singularity, where density becomes infinite and known physics breaks down.</p>
-        <span class="concept-eq">Rs = 2GM/c²</span>
-      </div>
-      <div class="concept-card">
-        <span class="concept-sym">△</span>
-        <h3 class="concept-name">The Big Bang</h3>
-        <p class="concept-desc">13.8 billion years ago, the universe erupted from an infinitely hot, dense point. Space, time, and matter all began in this single moment — there was no "before."</p>
-        <span class="concept-eq">t = 0, T → ∞</span>
-      </div>
-      <div class="concept-card">
-        <span class="concept-sym">∞</span>
-        <h3 class="concept-name">Arrow of Time</h3>
-        <p class="concept-desc">Why does time only flow forward? Hawking links the thermodynamic arrow of time — entropy always increases — to the cosmological expansion of the universe itself.</p>
-        <span class="concept-eq">ΔS ≥ 0</span>
-      </div>
-      <div class="concept-card">
-        <span class="concept-sym">⊛</span>
-        <h3 class="concept-name">Quantum Gravity</h3>
-        <p class="concept-desc">The great unification problem: reconciling Einstein's general relativity with quantum mechanics into a single "theory of everything." Hawking's no-boundary proposal imagines a universe with no edge in time.</p>
-        <span class="concept-eq">S = k log Ω</span>
-      </div>
-    </div>
-  </div>
+
+
 
   <!-- DATA PANEL + UNIVERSE STATS -->
   <div class="data-section fade-in visible">
@@ -429,59 +483,6 @@
     </div>
   </div>
 
-  <!-- QUOTES -->
-  <div class="quotes-row fade-in visible">
-    <div class="quote-block">
-      <p class="q-mark">— S.W. Hawking</p>
-      <p class="q-text">"If the rate of expansion one second after the Big Bang had been smaller by even one part in a hundred thousand million million, the universe would have recollapsed before it ever reached its present size."</p>
-      <p class="q-attr">A Brief History of Time, Chapter 8</p>
-    </div>
-    <div class="quote-block">
-      <p class="q-mark">— S.W. Hawking</p>
-      <p class="q-text">"Even if there is only one possible unified theory, it is just a set of rules and equations. What is it that breathes fire into the equations and makes a universe for them to describe?"</p>
-      <p class="q-attr">A Brief History of Time, Chapter 11</p>
-    </div>
-  </div>
-
-  <!-- CAST -->
-  <div class="cast-section fade-in visible" id="cast">
-    <div class="section-head">
-      <span class="section-head-label">Cast &amp; Crew</span>
-      <span class="section-head-title">The people behind the picture</span>
-    </div>
-    <div class="cast-grid">
-      <div class="cast-card"><div class="cast-av">BC</div><p class="cast-role">Stephen Hawking</p><p class="cast-name">Benedict Cumberbatch</p></div>
-      <div class="cast-card"><div class="cast-av">FJ</div><p class="cast-role">Jane Hawking</p><p class="cast-name">Felicity Jones</p></div>
-      <div class="cast-card"><div class="cast-av">DV</div><p class="cast-role">Director</p><p class="cast-name">Denis Villeneuve</p></div>
-      <div class="cast-card"><div class="cast-av">AG</div><p class="cast-role">Screenplay</p><p class="cast-name">Alex Garland</p></div>
-    </div>
-  </div>
-
-  <!-- PRESS -->
-  <div class="reviews-section fade-in visible" id="press">
-    <div class="section-head">
-      <span class="section-head-label">Press</span>
-      <span class="section-head-title">What critics are saying</span>
-    </div>
-    <div class="reviews-grid">
-      <div class="review-card">
-        <p class="review-stars">★ ★ ★ ★ ★</p>
-        <p class="review-text">"A film that makes you feel the weight and wonder of the cosmos. Villeneuve has done the impossible — he has made theoretical physics cinematic, human, and devastating."</p>
-        <p class="review-source">The Guardian</p>
-      </div>
-      <div class="review-card">
-        <p class="review-stars">★ ★ ★ ★ ★</p>
-        <p class="review-text">"Cumberbatch delivers the performance of the decade. The visualizations of spacetime and black holes are unlike anything committed to film before."</p>
-        <p class="review-source">Empire Magazine</p>
-      </div>
-      <div class="review-card">
-        <p class="review-stars">★ ★ ★ ★ ½</p>
-        <p class="review-text">"An intellectual triumph and an emotional gut-punch. The universe has never felt so vast, and Hawking's life has never felt so small and so enormous at once."</p>
-        <p class="review-source">New York Times</p>
-      </div>
-    </div>
-  </div>
-
   <!-- TICKETS -->
   <div class="cta-block fade-in visible" id="tickets">
     <div>
@@ -508,8 +509,7 @@
 </div>
 
 <footer>
-  <div class="footer-logo">A Brief History of Time · 2025</div>
-  <p class="footer-copy">© 2025 Hawking Estate. All rights reserved.</p>
+  <div class="footer-logo">A Brief History of Time · 2027</div>
   <div class="footer-links">
     <a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#">Press Kit</a>
     <a href="file:///home/djw/Coding/BHOTWebsite/brief_history_of_time_movie_site_v2.html#">Educators</a>
@@ -524,7 +524,7 @@
     <button class="trailer-close" onclick="document.querySelector(&#39;.trailer-modal&#39;).classList.remove(&#39;open&#39;)">✕ Close</button>
     <div class="trailer-box">
       <div class="play-btn"><div class="play-icon"></div></div>
-      <p class="trailer-cap">Official Theatrical Trailer · 2025</p>
+      <p class="trailer-cap">Official Theatrical Trailer · 2027</p>
     </div>
   </div>
 </div>
